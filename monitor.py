@@ -60,7 +60,11 @@ clients = {
         'The Car People':'http://thecarpeople.com',
         'TLP':'https://www.tightlineproductions.com',
         'Tripod Aluminum':'http://tripodaluminum.com',
-        'Danlinge':'http://danlinge.xyz'
+        'Danlinge':'http://danlinge.xyz',
+        'Dr. Stember':'http://drstember.com',
+        'Florida Ultra Running Club':'http://furtinc.com',
+        'Dirty Melvin':'http://dirtymelvinpolitics.com',
+        'Soar Florida':'http://soarflorida.com'
 }
 
 
