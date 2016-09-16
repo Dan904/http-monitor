@@ -63,8 +63,7 @@ clients = {
         'Danlinge':'http://danlinge.xyz',
         'Dr. Stember':'http://drstember.com',
         'Florida Ultra Running Club':'http://furtinc.com',
-        'Dirty Melvin':'http://dirtymelvinpolitics.com',
-        'Soar Florida':'http://soarflorida.com'
+        'Dirty Melvin':'http://dirtymelvinpolitics.com'
 }
 
 
