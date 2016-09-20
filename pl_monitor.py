@@ -39,6 +39,8 @@ def pl_site_up():
                         print(r.status_code)
                 except requests.exceptions.ReadTimeout:
                     plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
+                except:
+                    pass
 
 if __name__ == "__main__":
     pl_site_up()
