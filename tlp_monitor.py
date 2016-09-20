@@ -2,9 +2,7 @@
 #
 # monitor tlp clients
 
-import sys,os
-sys.path.append(os.path.abspath('..'))
-from boto_aws import getInst
+from awsboto import getInst
 
 import time
 from datetime import datetime

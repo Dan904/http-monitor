@@ -2,9 +2,7 @@
 #
 # monitor plutonium clients
 
-import sys,os
-sys.path.append(os.path.abspath('..'))
-from boto_aws import getInstPL
+from awsboto import getInstPL
 
 import time
 from datetime import datetime
