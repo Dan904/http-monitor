@@ -25,7 +25,8 @@ clients = {
         'Political Food for Thought':'http://politicalfoodforthought.com',
         'Sun Plumbing':'http://sunplumbing.com',
         'Dr. Stember':'http://drstember.com',
-        'Florida Ultra Running Club':'http://furtinc.com'
+        'Florida Ultra Running Club':'http://furtinc.com',
+        'dlxyz':'http://danlinge.xyz'
 }
 
 
@@ -41,6 +42,7 @@ def mt_site_up():
                 if r.status_code == 200:    # 200 = up! 
                     time.sleep(1)           # 1 second between checks
                     d = datetime.now()
+                    print(' ')
                     print( str(client) + " is up at " + str(d))
                     print(r.status_code)
                 else:

@@ -31,10 +31,12 @@ def pl_site_up():
                     if r.status_code == 200:
                         time.sleep(1)
                         d = datetime.now()
+                        print(' ')
                         print( client + " is up at " + str(d))
                         print(r.status_code)
                     else:
                         plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
+                        print(' ')
                         print( client+ " is down at " + str(d))
                         print(r.status_code)
                 except requests.exceptions.ReadTimeout:
