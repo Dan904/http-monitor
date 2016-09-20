@@ -20,7 +20,7 @@ slack = slackweb.Slack(url="https://hooks.slack.com/services/T1S9K0205/B1YLE2FMK
 
 
 
-def site_up():
+def tlp_site_up():
     "Function to monitor uptime, info gathered from aws"
     print("Running Check at " + str(d))
     for i in getInst():
@@ -42,6 +42,7 @@ def site_up():
                 except requests.exceptions.ReadTimeout:
                     slack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
 
+if __name__ == "__main__":
+    tlp_site_up()
 
-site_up()
 
