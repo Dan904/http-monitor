@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #
-# Code written by Daniel Linge 8/5/2016
-#
+# monitor plutonium clients
 
 import sys,os
 sys.path.append(os.path.abspath('..'))

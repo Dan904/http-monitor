@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-#
+# monitor tlp clients
 
 import sys,os
 sys.path.append(os.path.abspath('..'))
