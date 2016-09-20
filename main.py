@@ -5,31 +5,31 @@ from tlp_monitor import tlp_site_up
 
 
 def tlp_print():
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
     print("Checking Tight Line Production Clients")
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
 
 def pl_print():
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
     print("Checking Plutonium Production Clients")
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
 
 def mt_print():
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
     print("Checking Media Temple TLP Clients")
-    print()
+    print(' ')
     print('-'*50)
-    print()
+    print(' ')
 
 
 def main():
