@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 #
-# Code written by Daniel Linge 8/5/2016
 #
 
 import sys,os
@@ -13,15 +12,15 @@ import slackweb  #pip install slackweb https://github.com/satoshi03/slack-python
 import requests  #pip install requests
 import boto.ec2
 
-d = datetime.now()
 
 #Slack incoming web hook
-slack = slackweb.Slack(url="https://hooks.slack.com/services/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")
 
 
 
 def tlp_site_up():
     "Function to monitor uptime, info gathered from aws"
+    d = datetime.now()
+    tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
     print("Running Check at " + str(d))
     for i in getInst():
         tags = i.tags
@@ -33,14 +32,15 @@ def tlp_site_up():
                     r = requests.get(site, verify=False, timeout=10)
                     if r.status_code == 200:
                         time.sleep(1)
+                        d = datetime.now()
                         print( client + " is up at " + str(d))
                         print(r.status_code)
                     else:
-                        slack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
+                        tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
                         print( client+ " is down at " + str(d))
                         print(r.status_code)
                 except requests.exceptions.ReadTimeout:
-                    slack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
+                    tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
 
 if __name__ == "__main__":
     tlp_site_up()
