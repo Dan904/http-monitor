@@ -18,7 +18,7 @@ import boto.ec2
 def tlp_site_up():
     "Function to monitor uptime, info gathered from aws"
     d = datetime.now()
-    tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
+    tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
     print("Running Check at " + str(d))
     for i in getInst():
         tags = i.tags
