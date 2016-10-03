@@ -21,28 +21,35 @@ def pl_site_up():
     plSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
     print("Running Check at " + str(d))
     for i in getInstPL():
-        tags = i.tags
-        client = list(tags.values())[list(tags.keys()).index('Client')]
-        site = list(tags.values())[list(tags.keys()).index('URL')]
-        for tag,value in tags.items():
-            if tag == 'Process' and value == 'Live':
-                try:
-                    r = requests.get(site, verify=False, timeout=10)
-                    if r.status_code == 200:
-                        time.sleep(1)
-                        d = datetime.now()
-                        print(' ')
-                        print( client + " is up at " + str(d))
-                        print(r.status_code)
-                    else:
-                        plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
-                        print(' ')
-                        print( client+ " is down at " + str(d))
-                        print(r.status_code)
-                except requests.exceptions.ReadTimeout:
-                    plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
-                except:
-                    pass
+        try:
+            tags = i.tags
+            client = list(tags.values())[list(tags.keys()).index('Client')]
+            site = list(tags.values())[list(tags.keys()).index('URL')]
+            for tag,value in tags.items():
+                if tag == 'Process' and value == 'Live':
+                    try:
+                        r = requests.get(site, verify=False, timeout=10)
+                        if r.status_code == 200:
+                            time.sleep(1)
+                            d = datetime.now()
+                            print(' ')
+                            print( client + " is up at " + str(d))
+                            print(r.status_code)
+                        else:
+                            plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
+                            print(' ')
+                            print( client+ " is down at " + str(d))
+                            print(r.status_code)
+                    except requests.exceptions.ReadTimeout:
+                        plSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
+                    except:
+                        pass
+        except ValueError:
+            plSlack.notify(
+                    text=client+ "'s URL tag is broken. Site not monitored till it's fixed.",
+                    channel='#ec2-status',
+                    username="status-bot",
+                    icon_emoji=':warning:')
 
 if __name__ == "__main__":
     pl_site_up()
