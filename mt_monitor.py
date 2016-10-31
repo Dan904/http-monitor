@@ -26,8 +26,7 @@ clients = {
         'Sun Plumbing':'http://sunplumbing.com',
         'Dr. Stember':'http://drstember.com',
         'Florida Ultra Running Club':'http://furtinc.com',
-        'dlxyz':'http://danlinge.xyz',
-        'Inspirations Design Center':'http://www.inspirationsdesigncenter.com/'
+        'dlxyz':'http://danlinge.xyz'
 }
 
 
