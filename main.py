@@ -35,8 +35,8 @@ def mt_print():
 def main():
     pl_print()
     pl_site_up()
-    mt_print()
-    mt_site_up()
+#    mt_print()
+#    mt_site_up()
     tlp_print()
     tlp_site_up()
 
