@@ -18,6 +18,7 @@ def tlp_site_up():
     "Function to monitor uptime, info gathered from aws"
     d = datetime.now()
     tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
+    headers = {'User-Agent': 'Plutonium Slack Monitor Script'}
     print("Running Check at " + str(d))
     loc = getcity()
     for i in getInst():
@@ -28,7 +29,7 @@ def tlp_site_up():
             for tag,value in tags.items():
                 if tag == 'Process' and value == 'Live':
                     try:
-                        r = requests.get(site, verify=False, timeout=10)
+                        r = requests.get(site, verify=False, timeout=10, headers=headers)
                         if r.status_code == 200:
                             time.sleep(1)
                             d = datetime.now()
