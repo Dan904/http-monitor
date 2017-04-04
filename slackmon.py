@@ -9,7 +9,10 @@ import requests  #pip install requests
 from requests import get
 import logging
 
-logging.basicConfig(filename= 'slackmon.log', format='%(asctime)s %(message)s',level=logging.INFO)
+
+
+
+logging.basicConfig(filename= 'bin/http-monitor/slackmon.log', format='%(asctime)s %(message)s',level=logging.INFO)
 log = logging.getLogger(__name__)
 #console = logging.StreamHandler()
 #log.addHandler(console)
