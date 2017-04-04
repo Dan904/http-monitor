@@ -2,12 +2,11 @@
 
 
 import boto.ec2
-import time
-from datetime import datetime
 import slackweb  #pip install slackweb https://github.com/satoshi03/slack-python-webhook/blob/master/README.md
 import requests  #pip install requests
 from requests import get
 import logging
+import time
 
 
 
@@ -73,9 +72,10 @@ def slackMessage(client,city,url,error,company):
 
 def site_up():
     """Tests each instance on aws using tags if the site is up"""
-    d = datetime.now()
     headers = {'User-Agent': 'Plutonium Slack Monitor Script'}
+    log.info('-'*40+"\n")
     log.info('Site testing started')
+    log.info('-'*40+"\n")
     city = getcity()
     for i in getInst() + getInstPL():
         try:
@@ -90,7 +90,6 @@ def site_up():
                         r = requests.get(site, verify=False, timeout=10, headers=headers)
                         if r.status_code == 200:
                             time.sleep(1)
-                            d = datetime.now()
                             log.info(str(client)+' is up with '+ str(r.status_code))
                         else:
                             slackMessage(client,city,site,str(r.status_code),inc)
@@ -100,7 +99,7 @@ def site_up():
                         log.error(str(client)+' is down. Error = timeout')
                     except requests.exceptions.ConnectionError:
                         slackMessage(client,city,site,"Connection Refused",inc)
-                        log.error(str(client)+'is down. Error = Connection Refused')
+                        log.error(str(client)+' is down. Error = Connection Refused')
                     except:
                         pass
         except ValueError:
@@ -112,48 +111,47 @@ def site_up():
 # Media Temple Clients
 
 # List of Clients
-clients = {
+#clients = {
+#
+#        'Mothers Touch':'http://motouchmovers.com',
+#        'Aware Ortho':'http://awareorthopaedics.com',
+#        'Brenner Architect':'http://brennerarchitect.com',
+#        'Discovery Aviation':'http://discovery-aviation.com',
+#        'Dr. Go':'http://drgomd.com',
+#        'Florida Moving Systems':'http://flmove.com',
+#        'Indialantic Medical':'http://drstember.com',
+#        'Traxx':'http://offthetraxx.com',
+#        'Sun Plumbing':'http://sunplumbing.com',
+#        'Dr. Stember':'http://drstember.com',
+#        'Florida Ultra Running Club':'http://furtinc.com',
+#        'dlxyz':'http://danlinge.xyz'
+#}
+#
+#
 
-        'Mothers Touch':'http://motouchmovers.com',
-        'Aware Ortho':'http://awareorthopaedics.com',
-        'Brenner Architect':'http://brennerarchitect.com',
-        'Discovery Aviation':'http://discovery-aviation.com',
-        'Dr. Go':'http://drgomd.com',
-        'Florida Moving Systems':'http://flmove.com',
-        'Indialantic Medical':'http://drstember.com',
-        'Traxx':'http://offthetraxx.com',
-        'Sun Plumbing':'http://sunplumbing.com',
-        'Dr. Stember':'http://drstember.com',
-        'Florida Ultra Running Club':'http://furtinc.com',
-        'dlxyz':'http://danlinge.xyz'
-}
-
-
-
-def mt_site_up():
-        "Function to monitor uptime"
-        tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
-        d = datetime.now()
-        print("Running check at " + str(d))
-        for client, site in clients.items():
-            try:
-                r = requests.get(site, verify=False, timeout =10)
-                if r.status_code == 200:    # 200 = up! 
-                    time.sleep(1)           # 1 second between checks
-                    d = datetime.now()
-                    print(' ')
-                    print( str(client) + " is up at " + str(d))
-                    print(r.status_code)
-                else:
-                    tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
-                    d = datetime.now()
-                    print( str(client) + " is down at " + str(d))
-                    print(r.status_code)
-            except requests.exceptions.ReadTimeout:
-                tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
-            except:
-                pass
-
+#def mt_site_up():
+#        "Function to monitor uptime"
+#        tlpSlack = slackweb.Slack(url="https://hooks.slack.com/services/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")
+#        print("Running check at " + str(d))
+#        for client, site in clients.items():
+#            try:
+#                r = requests.get(site, verify=False, timeout =10)
+#                if r.status_code == 200:    # 200 = up! 
+#                    time.sleep(1)           # 1 second between checks
+#                    d = datetime.now()
+#                    print(' ')
+#                    print( str(client) + " is up at " + str(d))
+#                    print(r.status_code)
+#                else:
+#                    tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot",icon_emoji=':warning:')
+#                    d = datetime.now()
+#                    print( str(client) + " is down at " + str(d))
+#                    print(r.status_code)
+#            except requests.exceptions.ReadTimeout:
+#                tlpSlack.notify(text=client + " Website is Down!", channel="#ec2-status", username="status-bot", icon_emoji=':warning:')
+#            except:
+#                pass
+#
 
 
 def main():
