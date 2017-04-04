@@ -7,7 +7,9 @@ if not, a message is sent to slack.
 required tags:
 
 Client = client name
+
 Process = live (if not live, the site will not be tracked)
+
 URL = www.example.com
 
 
