@@ -12,20 +12,26 @@ import logging
 
 
 
-logging.basicConfig(filename= 'bin/http-monitor/slackmon.log', format='%(asctime)s %(message)s',level=logging.INFO)
 log = logging.getLogger(__name__)
+logFile = logging.FileHandler('bin/http-monitor/slackmon.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+logFile.setFormatter(formatter)
+log.addHandler(logFile)
+log.setLevel(logging.INFO)
 #console = logging.StreamHandler()
 #log.addHandler(console)
 
 
 
 def getInstPL():
+    """Returns instances from plutonium aws account"""
     conn = boto.ec2.connect_to_region("us-west-2",profile_name='pluto')
     reservations = conn.get_all_instances()
     instances = [i for r in reservations for i in r.instances]
     return instances
 
 def getInst():
+    """Returns instances from tlp aws account"""
     conn = boto.ec2.connect_to_region("us-west-2")
     reservations = conn.get_all_instances()
     instances = [i for r in reservations for i in r.instances]
@@ -33,6 +39,7 @@ def getInst():
 
 
 def getcity():
+    """In Atlanta or not"""
     atlip = '76.17.118.203'
     myip = str(get("https://api.ipify.org").text)
     if myip == atlip:
@@ -74,10 +81,7 @@ def site_up():
         try:
             tags = i.tags
             key = i.key_name
-            if key == "Pluto":
-                inc = "pluto"
-            else:
-                inc = "tlp"
+            inc = "pluto" if key == "Pluto" else 'tlp'
             client = list(tags.values())[list(tags.keys()).index('Client')]
             site = list(tags.values())[list(tags.keys()).index('URL')]
             for tag,value in tags.items():
